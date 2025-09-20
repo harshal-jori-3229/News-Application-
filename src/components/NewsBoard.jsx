@@ -1,25 +1,26 @@
-import { useState, useEffect } from 'react';
-import { NewsItems } from './newItems/NewsItems';
+import { useState, useEffect } from "react";
+import { NewsItems } from "./newItems/NewsItems";
 
-export const NewsBoard = ({ category, searchQuery = '' }) => {
+export const NewsBoard = ({ category, searchQuery = "" }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true); // ✅ important
-    const URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
-    fetch(URL)
-      .then((response) => response.json())
+    setLoading(true);
+
+    // ✅ Call Netlify function instead of NewsAPI directly
+    fetch(`/.netlify/functions/news?category=${category}`)
+      .then((res) => res.json())
       .then((data) => setArticles(data.articles || []))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [category]);
 
   // normalize search query
-  const q = (searchQuery || '').trim().toLowerCase();
+  const q = (searchQuery || "").trim().toLowerCase();
 
   const filteredArticles = articles.filter((a) => {
-    if (!q) return true; // show all if search is empty
+    if (!q) return true;
     return !!a.title && a.title.toLowerCase().includes(q);
   });
 
@@ -36,7 +37,7 @@ export const NewsBoard = ({ category, searchQuery = '' }) => {
           {filteredArticles.length === 0 ? (
             <div className="col-12">
               <p className="text-center">
-                No articles found{q ? ` for "${searchQuery}"` : ''}.
+                No articles found{q ? ` for "${searchQuery}"` : ""}.
               </p>
             </div>
           ) : (
