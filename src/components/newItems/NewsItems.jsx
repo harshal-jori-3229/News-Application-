@@ -1,5 +1,5 @@
 import React from 'react';
-import './NewsItems.css';
+import './newItems.css';
 
 export const NewsItems = ({ title, description, src, url }) => {
   const defaultImage = "https://plus.unsplash.com/premium_photo-1707080369554-359143c6aa0b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D";
