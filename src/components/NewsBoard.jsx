@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NewsItems } from './newItems/NewsItems';
+import { NewsItems } from './newItems/NewsItems.jsx';
 
 export const NewsBoard = ({ category, searchQuery = '' }) => {
   const [articles, setArticles] = useState([]);
