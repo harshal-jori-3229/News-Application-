@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 export async function handler(event) {
   const { category = "general" } = event.queryStringParameters;
 
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEWS_API_KEY}`;
+  const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.VITE_API_KEY}`;
 
   try {
     const response = await fetch(url);
